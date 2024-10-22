@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document Template</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header,
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: left;
+        }
+
+
+        .first-page {
+            margin-bottom: 20px;
+            /* Adjust margin to ensure proper spacing before page break */
+        }
+
+        .header img {
+            width: 100px;
+            height: 50px;
+        }
+
+        .content {
+            padding: 20px;
+            background-image: url("<%= baseUrl + '/' + watermark %>");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.5;
+            color: #000;
+        }
+
+        .page-break {
+            page-break-before: always;
+            margin: 0;
+        }
+
+        .header-left,
+        .header-center,
+        .header-right,
+        .footer-left,
+        .footer-center,
+        .footer-right {
+            flex: 1;
+            text-align: center;
+        }
+
+        .header-center,
+        .footer-center {
+            text-align: center;
+        }
+
+        .document-details {
+            margin-bottom: 20px;
+        }
+
+        .document-header,
+        .document-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- First Page Content -->
+    <div class="header first-page">
+        <h1>
+            <%= companyName %>
+        </h1>
+        <p>
+            <%= companyMotto %>
+        </p>
+        <img src="<%= companyLogo %>" alt="Company Logo" />
+    </div>
+    <div class="content">
+        <!-- Add any additional content for the first page here -->
+    </div>
+
+    <!-- Page Break Before Document Details -->
+    <div class="page-break"></div>
+
+    <!-- Subsequent Pages Content -->
+    <% if (header) { %>
+        <% header.forEach(function(item, index) { %>
+            <!-- Page Break Before Each Document Detail Section -->
+            <% if (index> 0) { %> <!-- Avoid page break before the first document detail -->
+                <div class="page-break"></div>
+                <% } %>
+
+                    <div class="content document-details">
+                        <!-- Document Header -->
+                        <div class="document-header">
+                            <div class="header-left">
+                                <%= item.headerLeft %>
+                            </div>
+                            <div class="header-center">
+                                <%= item.headerCenter %>
+                            </div>
+                            <div class="header-right">
+                                <%= item.headerRight %>
+                            </div>
+                        </div>
+
+                        <!-- Document Content -->
+                        <!-- <p><strong>Tag5:</strong> <img
+                                src="<%= baseUrl + '/' + 'public' + '/' + 'images' + '/' + item.tag5 %>" width="100"
+                                height="50" /></p>
+
+                        <p> -->
+                        <p style="justify-content: center; margin-top: 20px;">
+                            <%= item.disclaimer %>
+                        </p>
+
+                        <p><strong>Header Image:</strong> <img
+                                src="<%=baseUrl + '/public/images/' + item.headerImage %>" alt="Header Image"
+                                width="100" height="50" /></p>
+
+                        <!-- Document Footer -->
+                        <div class="document-footer">
+                            <div class="footer-left">
+                                <%= item.footerLeft %>
+                            </div>
+                            <div class="footer-center">
+                                <%= item.footerCenter %>
+                            </div>
+                            <div class="footer-right">
+                                <%= item.footerRight %>
+                            </div>
+                        </div>
+                    </div>
+                    <% }); %>
+                        <% } %>
+
+                            <!-- Footer -->
+                            <div class="footer">
+                                <div class="footer-left">
+                                    <%= companyName %>
+                                </div>
+                                <div class="footer-center">
+                                    &copy; <%= new Date().getFullYear() %>
+                                </div>
+                                <div class="footer-right">
+                                    <!-- Optionally add something here -->
+                                </div>
+                            </div>
+</body>
+
+</html>
