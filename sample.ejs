@@ -33,7 +33,6 @@
 
         .content {
             padding: 20px;
-            background-image: url("<%= baseUrl + '/' + watermark %>");
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -79,12 +78,20 @@
     <!-- First Page Content -->
     <div class="header first-page">
         <h1>
-            <%= companyName %>
+            <%= companyName? companyName: '' %>
         </h1>
         <p>
-            <%= companyMotto %>
+            <%= typeof companyMotto !=='undefined' && companyMotto ? companyMotto : '' %>
         </p>
-        <img src="<%= companyLogo %>" alt="Company Logo" />
+        <p>
+            <%= typeof companyLogo !=='undefined' && companyLogo ? companyLogo : '' %>
+        </p>
+        <p>
+            <%= typeof watermark !=='undefined' && watermark ? watermark : '' %>
+        </p>
+        <p>
+            <%= typeof tag5 !=='undefined' && tag5 ? tag5 : '' %>
+        </p>
     </div>
     <div class="content">
         <!-- Add any additional content for the first page here -->
@@ -124,10 +131,6 @@
                         <p style="justify-content: center; margin-top: 20px;">
                             <%= item.disclaimer %>
                         </p>
-
-                        <p><strong>Header Image:</strong> <img
-                                src="<%=baseUrl + '/public/images/' + item.headerImage %>" alt="Header Image"
-                                width="100" height="50" /></p>
 
                         <!-- Document Footer -->
                         <div class="document-footer">
